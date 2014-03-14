@@ -3,7 +3,7 @@
 end
 
 
-get '/' do
+get '/random' do
   doc = Nokogiri::HTML(open("http://thecodinglove.com/random"))
   
   content_type :json
