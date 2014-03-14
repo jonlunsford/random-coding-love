@@ -2,9 +2,14 @@
   require lib
 end
 
-doc = Nokogiri::HTML(open("http://thecodinglove.com/random"))
 
-get '/random' do
+get '/' do
+  doc = Nokogiri::HTML(open("http://thecodinglove.com/random"))
+  
   content_type :json
   {:title => doc.css(".post h3").first.text, :image => doc.css(".post .bodytype img")[0]['src']}.to_json
+end
+
+get "/callback" do
+  puts params
 end
