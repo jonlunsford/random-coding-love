@@ -1,4 +1,4 @@
-%w(sinatra json nokogiri open-uri dotenv httparty).each do |lib|
+%w(sinatra json nokogiri open-uri httparty).each do |lib|
   require lib
 end
 
@@ -21,7 +21,7 @@ post '/slack' do
     icon_emoji: ":space_invader:"
   }
 
-  httparty.post(ENV["slack_incoming_webhook"], body: { payload: response })
+  httparty.post(ENV["SLACK_WEBHOOK"], body: { payload: response })
 
   status 200
 end
