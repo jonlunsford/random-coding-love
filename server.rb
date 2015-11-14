@@ -6,7 +6,7 @@ get '/' do
   parse_post
 end
 
-get '/slack' do
+post '/slack' do
   doc = Nokogiri::HTML(open("http://thecodinglove.com/random"))
   text = doc.css(".post h3").first.text
   image = doc.css(".post .bodytype img")[0]['src']
@@ -16,18 +16,12 @@ get '/slack' do
       pretext: text,
       image_url: image
     }],
-    channel: params[:channel_name],
+    channel: "##{params[:channel_name]}",
     username: "the_coding_love()",
     icon_emoji: ":space_invader:"
   }
 
-  puts "!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  puts params
-  puts "!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  puts HTTParty.post(ENV["SLACK_WEBHOOK"], body: { payload: response.to_json })
-  puts "!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  puts response
-  puts "!!!!!!!!!!!!!!!!!!!!!!!!!!"
+  HTTParty.post(ENV["SLACK_WEBHOOK"], body: { payload: response.to_json })
 
   status 200
 end
