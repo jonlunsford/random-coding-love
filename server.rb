@@ -6,7 +6,7 @@ get '/' do
   parse_post
 end
 
-post '/slack' do
+get '/slack' do
   doc = Nokogiri::HTML(open("http://thecodinglove.com/random"))
   text = doc.css(".post h3").first.text
   image = doc.css(".post .bodytype img")[0]['src']
