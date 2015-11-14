@@ -14,15 +14,14 @@ post '/slack' do
   response = {
     attachments: [{
       pretext: text,
-      image_url: image,
-      channel: params[:channel_name]
+      image_url: image
     }],
+    channel: params[:channel_name],
     username: "the_coding_love()",
     icon_emoji: ":space_invader:"
   }
 
-  puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  puts HTTParty.post(ENV["SLACK_WEBHOOK"], body: { payload: response })
+  HTTParty.post(ENV["SLACK_WEBHOOK"], body: { payload: response.to_json })
 
   status 200
 end
