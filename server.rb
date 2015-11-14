@@ -21,7 +21,7 @@ post '/slack' do
     icon_emoji: ":space_invader:"
   }
 
-  httparty.post(ENV["SLACK_WEBHOOK"], body: { payload: response })
+  HTTParty.post(ENV["SLACK_WEBHOOK"], body: { payload: response })
 
   status 200
 end
